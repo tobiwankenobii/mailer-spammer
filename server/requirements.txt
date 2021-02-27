@@ -5,6 +5,9 @@ django-cors-headers==3.7.0
 djangorestframework-simplejwt==4.6.0
 sendgrid==6.6.0
 
+pytest==6.2.2
+pytest-django==4.1.0
+
 black==20.8b.1
 flake8==3.8.4
 isort==5.7.0

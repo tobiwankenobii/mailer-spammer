@@ -2,6 +2,7 @@
 staticfiles/
 static/
 __pycache__
+.pytest_cache/
 .env
 
 db.sqlite3

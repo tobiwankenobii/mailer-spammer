@@ -10,6 +10,7 @@ class EmailConfig(models.Model):
         User,
         related_name="email_configs",
         on_delete=models.CASCADE,
+        editable=False,
     )
     recipient = models.EmailField()
     created_at = models.DateTimeField("Created at", auto_now_add=True)

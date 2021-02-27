@@ -20,16 +20,6 @@ class EmailConfigManagementViewSet(viewsets.ModelViewSet):
         """Show configs created only by giver user."""
         return self.queryset.filter(author=self.request.user)
 
-    def create(self, request, *args, **kwargs):
-        """Take the author field from the request."""
-        request.data["author"] = request.user.pk
-        return super().create(request, args, kwargs)
-
-    def update(self, request, *args, **kwargs):
-        """Do not allow overwriting initial author."""
-        request.data.pop("author")
-        return super().update(request, args, kwargs)
-
     @action(detail=True, methods=["get"])
     def send(self, request, pk):
         """Builds and sends an email using Sendgrid based on EmailConfig instance."""
