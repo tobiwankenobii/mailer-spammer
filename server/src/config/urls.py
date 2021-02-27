@@ -3,9 +3,13 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from apps.emails.api.views import EmailConfigManagementViewSet
 from apps.users.api.views import UserRegisterView
 
 router = routers.DefaultRouter()
+router.register(
+    r"api/email-configs", EmailConfigManagementViewSet, basename="email_configs"
+)
 
 urlpatterns = [
     path("", include(router.urls)),

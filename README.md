@@ -21,3 +21,9 @@ docker-compose up
 Django application should be available at http://localhost:8000/.
 
 Frontend should be available at X.
+
+###If you are having problems with volumes read-only status
+
+```console
+sudo chown -R $USER:$USER server
+```
