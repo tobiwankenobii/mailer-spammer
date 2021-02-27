@@ -13,4 +13,4 @@ class EmailConfigSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EmailConfig
-        fields = ("pk", "author", "recipient", "subject", "content")
+        fields = ("pk", "author", "recipient", "subject", "content", "send_at")
