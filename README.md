@@ -4,7 +4,7 @@ Django and X app for mail spamming.
 
 ## Getting started
 
-Make sure you are having the `.env.dev` file.
+Make sure you are having the `.env` and `.env.dev` files.
 
 ### Build docker images
 
@@ -12,7 +12,7 @@ Make sure you are having the `.env.dev` file.
 docker-compose build
 ```
 
-### Run docker containers with `docker-compose`
+### Run docker containers with docker-compose
 
 ```console
 docker-compose up

@@ -1,6 +1,8 @@
 Django==3.1.7
 psycopg2==2.8.6
 djangorestframework==3.12.2
+django-cors-headers==3.7.0
+djangorestframework-simplejwt==4.6.0
 
 black==20.8b.1
 flake8==3.8.4

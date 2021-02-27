@@ -13,12 +13,18 @@ services:
       - db
     env_file:
       - ./.env.dev
+      - ./server/.env
     stdin_open: true
     tty: true
 
   db:
+    container_name: mailer-postgres
     restart: always
     image: postgres:10.1
-    container_name: mailer-postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     env_file:
       - ./.env.dev
+
+volumes:
+    postgres_data:
