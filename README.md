@@ -1,7 +1,7 @@
 # Mailer-Spammer
 
-Django boiler for spamming with emails. Backend models & views are ready to go. Content can be taken from both direct
-typing or RSS etc. Feel free to fork and add your own frontend.
+Django boiler for emails spamming app. Backend models & views are ready to go. Content can be taken from both direct
+typing or RSS. Feel free to fork and add your own frontend.
 
 ## Getting started
 
@@ -19,16 +19,18 @@ docker-compose build
 docker-compose up
 ```
 
-Django application should be available at `http://localhost:8000/`.
-
-Docs are available at `/api/docs/`.
-
-There are also `test` and `black` make commands inside `server` folder.
-
-Frontend will be there, when you add it.
-
 ### If you are having problems with volumes read-only status
 
 ```console
 sudo chown -R $USER:$USER server
 ```
+
+## Accessibility
+
+* Django application should be available at `http://localhost:8000/`.
+
+* Docs are available at `/api/docs/`.
+
+* There are also `test` and `black` make commands inside `server` folder.
+
+* Frontend will be available as soon as you add it.
