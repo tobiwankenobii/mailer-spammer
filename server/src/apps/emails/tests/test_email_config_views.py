@@ -78,4 +78,4 @@ def test_email_config_create_with_wrong_author(api_client):
         },
     )
     assert response.status_code == 201
-    assert EmailConfig.objects.get(pk=response.data['pk']).author != author
+    assert EmailConfig.objects.get(pk=response.data["pk"]).author != author

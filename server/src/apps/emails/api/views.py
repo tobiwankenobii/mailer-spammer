@@ -17,7 +17,7 @@ class EmailConfigManagementViewSet(viewsets.ModelViewSet):
     serializer_class = EmailConfigSerializer
 
     def get_queryset(self):
-        """Show configs created only by giver user."""
+        """Show configs created only by given user."""
         return self.queryset.filter(author=self.request.user)
 
     @action(detail=True, methods=["get"])
@@ -32,4 +32,6 @@ class EmailConfigManagementViewSet(viewsets.ModelViewSet):
         )
         sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
         sg.send(message)
-        return Response(status=200, data={"detail": "Mail sent successfully"})
+        return Response(
+            status=200, data={"detail": "Mail has been sent successfully"}
+        )

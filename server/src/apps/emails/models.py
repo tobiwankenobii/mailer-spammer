@@ -4,7 +4,7 @@ from apps.users.models import User
 
 
 class EmailConfig(models.Model):
-    """Config for building email templates"""
+    """Config for building email templates."""
 
     author = models.ForeignKey(
         User,
@@ -17,7 +17,7 @@ class EmailConfig(models.Model):
 
     subject = models.CharField(max_length=127)
     content = models.TextField()
-    send_at = models.DateTimeField()
+    send_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.subject} created_at {self.created_at}"

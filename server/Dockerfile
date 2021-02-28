@@ -2,10 +2,10 @@ FROM python:3.8-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y gcc libpq-dev
+RUN apt-get update && apt-get install -y gcc libpq-dev make
 RUN pip install --upgrade pip
 
-ADD requirements.txt requirements.txt
+ADD requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY . /app/

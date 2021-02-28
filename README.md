@@ -1,6 +1,7 @@
-# Mailer
+# Mailer-Spammer
 
-Django and X app for mail spamming.
+Django boiler for spamming with emails. Backend models & views are ready to go. Content can be taken from both direct
+typing or RSS etc. Feel free to fork and add your own frontend.
 
 ## Getting started
 
@@ -20,10 +21,16 @@ docker-compose up
 
 Django application should be available at http://localhost:8000/.
 
-Frontend should be available at X.
+Frontend will be there, when you add it.
 
 ### If you are having problems with volumes read-only status
 
 ```console
 sudo chown -R $USER:$USER server
 ```
+
+### Things that need to be done:
+
+* 100% tests coverage
+* Sphinx
+* Swagger
