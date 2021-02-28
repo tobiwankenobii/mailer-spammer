@@ -18,7 +18,7 @@ class EmailConfigSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """And he should never change through the request."""
-        validated_data.pop("author")
+        validated_data.pop("author", None)
         return super().update(instance, validated_data)
 
     class Meta:

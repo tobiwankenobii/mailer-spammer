@@ -19,7 +19,11 @@ docker-compose build
 docker-compose up
 ```
 
-Django application should be available at http://localhost:8000/.
+Django application should be available at `http://localhost:8000/`.
+
+Docs are available at `/api/docs/`.
+
+There are also `test` and `black` make commands inside `server` folder.
 
 Frontend will be there, when you add it.
 
@@ -28,9 +32,3 @@ Frontend will be there, when you add it.
 ```console
 sudo chown -R $USER:$USER server
 ```
-
-### Things that need to be done:
-
-* 100% tests coverage
-* Sphinx
-* Swagger

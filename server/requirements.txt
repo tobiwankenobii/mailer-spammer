@@ -7,6 +7,7 @@ sendgrid==6.6.0
 
 pytest==6.2.2
 pytest-django==4.1.0
+drf-spectacular==0.13.2
 
 black==20.8b.1
 flake8==3.8.4
