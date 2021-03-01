@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from apps.emails.models import EmailConfig
 from apps.users.models import User
+from ..models import EmailConfig
 
 
 class EmailConfigSerializer(serializers.ModelSerializer):

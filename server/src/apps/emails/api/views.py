@@ -1,13 +1,10 @@
-import os
-
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 
-from apps.emails.models import EmailConfig
 from .serializers import EmailConfigSerializer
+from ..models import EmailConfig
+from ..services import SendGridEmailService
 
 
 class EmailConfigManagementViewSet(viewsets.ModelViewSet):
@@ -22,16 +19,9 @@ class EmailConfigManagementViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["get"])
     def send(self, request, pk):
-        """Builds and sends an email using Sendgrid based on EmailConfig instance."""
+        """Builds and sends an email using Sendgrid Service based on EmailConfig instance."""
         config = self.get_object()
-        message = Mail(
-            from_email=os.environ.get("SENDGRID_EMAIL"),
-            to_emails=config.recipient,
-            subject=config.subject,
-            html_content=config.content,
-        )
-        sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
-        sg.send(message)
+        SendGridEmailService().build_and_send_email(config)
         return Response(
             status=200, data={"detail": "Mail has been sent successfully"}
         )

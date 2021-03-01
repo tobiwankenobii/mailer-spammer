@@ -1,10 +1,13 @@
 import typing as T  # noqa:N812
+from unittest.mock import patch
 
 import pytest
 from django.db.models import Model
 from django.utils import timezone
+from sendgrid import SendGridAPIClient
 
 from apps.emails.models import EmailConfig
+from apps.emails.services import SendGridEmailService
 from apps.users.models import User
 
 
@@ -157,3 +160,32 @@ def test_email_config_permissions(api_client):
     assert response.status_code == 404
     response = api_client.delete(f"/api/email-configs/{config.pk}/")
     assert response.status_code == 404
+
+
+@pytest.mark.django_db
+@patch.object(SendGridEmailService, "send_email")
+@patch.object(SendGridEmailService, "build_email")
+def test_build_email(mock_build, mock_send, api_client):
+    generate_configs(1)
+    config = EmailConfig.objects.first()
+    response = api_client.get(
+        f"/api/email-configs/{config.pk}/send/",
+    )
+    assert response.status_code == 200
+    mock_build.assert_called_with(config)
+
+
+@pytest.mark.django_db
+@patch.object(SendGridAPIClient, "send")
+@patch.object(SendGridAPIClient, "__init__", return_value=None)
+@patch.object(
+    SendGridEmailService, "build_email", return_value={"info": "mocked_mail"}
+)
+def test_send_email(mock_build, mock_init, mock_send, api_client):
+    generate_configs(1)
+    config = EmailConfig.objects.first()
+    response = api_client.get(
+        f"/api/email-configs/{config.pk}/send/",
+    )
+    assert response.status_code == 200
+    mock_send.assert_called_with({"info": "mocked_mail"})
