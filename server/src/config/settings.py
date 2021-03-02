@@ -10,11 +10,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = environ.get("SECRET_KEY", "***** ***")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = ["backend"]
+ALLOWED_HOSTS = ["localhost", "backend"]
 
 # Application definition
+
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",

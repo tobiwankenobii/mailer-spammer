@@ -34,3 +34,15 @@ sudo chown -R $USER:$USER server
 * There are also `test` and `black` make commands inside `server` folder.
 
 * Frontend will be available as soon as you add it.
+
+## Environment Variables
+
+Example file `.dev.env` is in the root of the repo. You should change it in your own project. 
+
+Here are the additional environment variables you will need in `/server/.env` file.
+
+| Variable name     | Value |
+| ----------------- | ----- |
+| SECRET_KEY        |       |
+| SENDGRID_EMAIL    |       |
+| SENDGRID_API_KEY  |       |
