@@ -24,6 +24,8 @@ class SendGridEmailService:
         )
         if config.send_at:
             mail.send_at = int(config.send_at.timestamp())
+        if config.images:
+            mail.attachment = config.images.values_list("file", flat=True)
         return mail
 
     def send_email(self, mail: Mail):

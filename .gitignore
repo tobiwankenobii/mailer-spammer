@@ -1,6 +1,7 @@
 .idea
 staticfiles/
 static/
+images/
 __pycache__
 .pytest_cache/
 .env

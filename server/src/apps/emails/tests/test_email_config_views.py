@@ -29,10 +29,15 @@ def generate_configs(amount: int):
 
 
 def check_every_field_for_instance(instance: Model, data: T.Dict):
-    """Checks for every field in given instance, comparing to given config."""
+    """Checks for every field in given instance, comparing to given config.
+    If instance field is some kind of related manager, it should get converted to a list of objects.
+    """
     instance.refresh_from_db()
     for field in data.keys():
-        assert getattr(instance, field) == data[field]
+        field_value = getattr(instance, field)
+        if manager_objects := getattr(field_value, "all", None):
+            field_value = list(manager_objects())
+        assert field_value == data[field]
 
 
 @pytest.mark.django_db
