@@ -1,4 +1,7 @@
+from base64 import b64encode
+
 from django.db import models
+from sendgrid import Attachment
 
 from apps.emails.managers import ImageManager
 from apps.users.models import User
@@ -34,6 +37,12 @@ class Image(models.Model):
     )
 
     objects = ImageManager()
+
+    def to_attachment(self) -> Attachment:
+        """Prepare ready-to-send image attachment."""
+        return Attachment(
+            b64encode(self.file.read()).decode(), self.name, "application/png"
+        )
 
     def delete(self, using=None, keep_parents=False):
         """Delete image file on instance destroy."""
