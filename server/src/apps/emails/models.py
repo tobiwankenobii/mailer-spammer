@@ -1,5 +1,6 @@
 from base64 import b64encode
 
+import requests
 from django.db import models
 from sendgrid import Attachment
 
@@ -20,7 +21,7 @@ class EmailConfig(models.Model):
     created_at = models.DateTimeField("Created at", auto_now_add=True)
 
     subject = models.CharField(max_length=127)
-    content = models.TextField()
+    content = models.TextField(null=True, blank=True)
     send_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
@@ -51,3 +52,19 @@ class Image(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class RssLink(models.Model):
+    """Holds a link for building config's content."""
+
+    url = models.URLField()
+    config = models.ForeignKey(
+        EmailConfig, on_delete=models.CASCADE, related_name="rss_links"
+    )
+
+    def to_content(self) -> str:
+        """Requests for content hosted by RSS and returns it."""
+        try:
+            return requests.get(self.url).content.decode("utf-8")
+        except [ConnectionError, requests.exceptions.ConnectionError]:
+            return ""

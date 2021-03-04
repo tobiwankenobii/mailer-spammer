@@ -15,16 +15,27 @@ class SendGridEmailService:
     def build_email(self, config: EmailConfig) -> Mail:
         """Builds an email based on given config.
         Edits email's sending date if config has one, otherwise email will be send immediately.
+        Adds rss content and images to attachments if config is having ones.
         """
+        html_content = (
+            config.content
+            if not config.rss_links.exists()
+            else "\n".join(
+                [
+                    config.content,
+                    *[link.to_content() for link in config.rss_links.all()],
+                ]
+            )
+        )
         mail = Mail(
             from_email=self.sender,
             to_emails=config.recipient,
             subject=config.subject,
-            html_content=config.content,
+            html_content=html_content,
         )
         if config.send_at:
             mail.send_at = int(config.send_at.timestamp())
-        if config.images:
+        if config.images.exists():
             mail.attachment = [
                 image.to_attachment() for image in config.images.all()
             ]
