@@ -1,7 +1,7 @@
 .PHONY: test
 ## Run tests
 test:
-	pytest src -p no:cacheprovider
+	python -m pytest src/apps --cov -p no:cacheprovider
 
 .PHONY: black
 ## Run black

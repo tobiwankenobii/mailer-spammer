@@ -5,6 +5,7 @@ images/
 __pycache__
 .pytest_cache/
 .env
+.coverage
 
 db.sqlite3
 venv/
